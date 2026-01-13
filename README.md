@@ -27,9 +27,9 @@ This repository bridges the gap between mathematical theory and practical implem
 
 | Level | Description |
 |-------|-------------|
-| 🌱 **Beginners** | Start with [foundations/](./foundations/) and the [beginner learning path](./docs/learning_paths/beginner.md) |
-| 📈 **Intermediate** | Dive into [algorithms/](./algorithms/) and [neural_networks/](./neural_networks/) |
-| 🚀 **Advanced** | Explore [transformers/](./transformers/) and [deep_learning/](./deep_learning/) |
+| 🌱 **Beginners** | Start with [02_foundations/](./02_foundations/) and the [beginner learning path](./01_docs/learning_paths/beginner.md) |
+| 📈 **Intermediate** | Dive into [03_algorithms/](./03_algorithms/) and [05_neural_networks/](./05_neural_networks/) |
+| 🚀 **Advanced** | Explore [07_transformers/](./07_transformers/) and [06_deep_learning/](./06_deep_learning/) |
 | 🔬 **Researchers** | Use as a reference for mathematical derivations |
 
 ## 🗂️ Repository Structure
@@ -43,10 +43,13 @@ ml-math-and-applications/
 ├── requirements.txt                # Python dependencies
 ├── environment.yml                 # Conda environment
 │
-├── docs/                           # Documentation
+├── 01_docs/                        # Documentation
 │   ├── index.md                    # Documentation home
 │   ├── glossary.md                 # ML terms glossary
 │   ├── faq.md                      # Frequently asked questions
+│   ├── data_science_lifecycle.md   # Complete DS lifecycle guide
+│   ├── eda_complete_guide.md       # Exploratory data analysis
+│   ├── visualization_interpretation.md # Plot interpretation
 │   ├── learning_paths/             # Structured curricula
 │   │   ├── beginner.md
 │   │   ├── intermediate.md
@@ -60,10 +63,9 @@ ml-math-and-applications/
 │   └── ml_theory/                  # Core ML concepts
 │       ├── bias_variance.md
 │       ├── generalization.md
-│       ├── regularization.md
-│       └── evaluation_metrics.md
+│       └── regularization.md
 │
-├── foundations/                    # Prerequisites
+├── 02_foundations/                 # Prerequisites
 │   ├── python_refresher.md
 │   ├── numpy/
 │   │   ├── arrays.ipynb
@@ -72,84 +74,74 @@ ml-math-and-applications/
 │   └── matplotlib/
 │       └── visualization_basics.ipynb
 │
-├── algorithms/
+├── 03_algorithms/
 │   ├── supervised/
-│   │   ├── linear_regression/      # ✅ Complete implementation
-│   │   │   ├── README.md
-│   │   │   ├── theory.md
-│   │   │   ├── scratch.py
-│   │   │   ├── sklearn_impl.py
-│   │   │   └── experiments.ipynb
-│   │   ├── logistic_regression/    # Stub
-│   │   ├── knn/                    # Stub
-│   │   ├── svm/                    # Stub
-│   │   └── decision_trees/         # Stub
+│   │   ├── linear_regression/      # Complete implementation
+│   │   ├── logistic_regression/
+│   │   ├── knn/
+│   │   ├── svm/
+│   │   └── decision_trees/
 │   ├── unsupervised/
-│   │   ├── kmeans/                 # Stub
-│   │   ├── hierarchical_clustering/ # Stub
-│   │   └── gmm_em/                 # Stub
+│   │   ├── kmeans/
+│   │   ├── hierarchical_clustering/
+│   │   └── gmm_em/
 │   └── ensemble_methods/
-│       ├── random_forest/          # Stub
-│       ├── gradient_boosting/      # Stub
-│       └── xgboost/                # Stub
+│       ├── random_forest/
+│       ├── gradient_boosting/
+│       └── xgboost/
 │
-├── dimensionality_reduction/
-│   ├── pca/                        # Stub
-│   ├── lda/                        # Stub
-│   └── tsne_umap/                  # Stub
+├── 04_dimensionality_reduction/
+│   ├── pca/
+│   ├── lda/
+│   └── tsne_umap/
 │
-├── neural_networks/
-│   ├── perceptron/                 # Stub
-│   ├── multilayer_nn/              # Stub
-│   ├── backpropagation/            # Stub
-│   └── optimization_methods/       # Stub
+├── 05_neural_networks/
+│   ├── perceptron/
+│   ├── multilayer_nn/
+│   ├── backpropagation/
+│   └── optimization_methods/
 │
-├── deep_learning/
-│   ├── cnn/                        # Stub
-│   ├── rnn/                        # Stub
-│   ├── lstm_gru/                   # Stub
-│   └── attention/                  # Stub
+├── 06_deep_learning/
+│   ├── cnn/
+│   ├── rnn/
+│   ├── lstm_gru/
+│   └── attention/
 │
-├── transformers/
-│   ├── self_attention/             # Stub
-│   ├── transformer_from_scratch/   # Stub
-│   ├── positional_encoding/        # Stub
-│   └── llm_fundamentals/           # Stub
+├── 07_transformers/
+│   ├── self_attention/
+│   ├── transformer_from_scratch/
+│   ├── positional_encoding/
+│   └── llm_fundamentals/
 │
-├── frameworks/
+├── 08_frameworks/
 │   ├── scikit_learn/
-│   │   └── pipelines_and_models.ipynb
 │   ├── pytorch/
-│   │   ├── tensors_autograd.ipynb
-│   │   ├── training_loop.py
-│   │   └── custom_datasets.py
 │   └── tensorflow/
-│       └── keras_models.ipynb
 │
-├── applications/
-│   ├── regression/                 # Stub
-│   └── llm_apps/                   # Stub
+├── 09_applications/
+│   ├── regression/
+│   └── llm_apps/
 │
-├── utils/
-│   ├── metrics.py                  # Evaluation metrics
-│   ├── plotting.py                 # Visualization helpers
-│   ├── data_loader.py              # Data utilities
-│   └── math_helpers.py             # Math functions
+├── 10_utils/
+│   ├── metrics.py
+│   ├── plotting.py
+│   ├── data_loader.py
+│   └── math_helpers.py
 │
-├── tests/
+├── 11_tests/
 │   ├── test_algorithms.py
 │   ├── test_utils.py
 │   └── test_models.py
 │
-├── experiments/                    # Ablation studies, benchmarks
+├── 12_experiments/                 # Ablation studies, benchmarks
 │
-├── references/
+├── 13_references/
 │   ├── books.md
 │   ├── papers.md
 │   └── online_resources.md
 │
 └── .github/
-    ├── workflows/ci.yml            # CI/CD
+    ├── workflows/ci.yml
     └── ISSUE_TEMPLATE.md
 ```
 
@@ -175,7 +167,7 @@ conda activate ml-math
 
 ```python
 # From-scratch linear regression
-from algorithms.supervised.linear_regression.scratch import LinearRegressionScratch
+from 03_algorithms.supervised.linear_regression.scratch import LinearRegressionScratch
 import numpy as np
 
 # Generate sample data
@@ -218,10 +210,10 @@ Before diving into algorithms, ensure familiarity with:
 
 | Topic | Key Concepts | Resource |
 |-------|--------------|----------|
-| Linear Algebra | Vectors, matrices, eigenvalues | [docs/math_prerequisites/linear_algebra.md](./docs/math_prerequisites/linear_algebra.md) |
-| Probability | Distributions, Bayes' theorem | [docs/math_prerequisites/probability.md](./docs/math_prerequisites/probability.md) |
-| Calculus | Gradients, chain rule | [docs/math_prerequisites/calculus.md](./docs/math_prerequisites/calculus.md) |
-| Optimization | Gradient descent, convexity | [docs/math_prerequisites/optimization.md](./docs/math_prerequisites/optimization.md) |
+| Linear Algebra | Vectors, matrices, eigenvalues | [01_docs/math_prerequisites/linear_algebra.md](./01_docs/math_prerequisites/linear_algebra.md) |
+| Probability | Distributions, Bayes' theorem | [01_docs/math_prerequisites/probability.md](./01_docs/math_prerequisites/probability.md) |
+| Calculus | Gradients, chain rule | [01_docs/math_prerequisites/calculus.md](./01_docs/math_prerequisites/calculus.md) |
+| Optimization | Gradient descent, convexity | [01_docs/math_prerequisites/optimization.md](./01_docs/math_prerequisites/optimization.md) |
 
 ## 🛠️ Technologies
 

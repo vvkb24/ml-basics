@@ -101,4 +101,4 @@ Before diving in, ensure familiarity with:
 - Basic neural networks (MLPs, backpropagation)
 - Python and NumPy
 
-See [docs/math_prerequisites/](../docs/math_prerequisites/) for refreshers.
+See [01_docs/math_prerequisites/](../01_docs/math_prerequisites/) for refreshers.

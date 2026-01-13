@@ -20,8 +20,8 @@ Complete the [Beginner Path](./beginner.md) or have equivalent knowledge of:
 - Gradient descent optimization
 
 **Resources:**
-- [Theory](../../algorithms/supervised/logistic_regression/theory.md)
-- [Implementation](../../algorithms/supervised/logistic_regression/scratch.py)
+- [Theory](../../03_algorithms/supervised/logistic_regression/theory.md)
+- [Implementation](../../03_algorithms/supervised/logistic_regression/scratch.py)
 
 ### Week 3: K-Nearest Neighbors
 - Distance metrics (Euclidean, Manhattan, Minkowski)
@@ -29,8 +29,8 @@ Complete the [Beginner Path](./beginner.md) or have equivalent knowledge of:
 - Curse of dimensionality
 
 **Resources:**
-- [Theory](../../algorithms/supervised/knn/theory.md)
-- [Implementation](../../algorithms/supervised/knn/scratch.py)
+- [Theory](../../03_algorithms/supervised/knn/theory.md)
+- [Implementation](../../03_algorithms/supervised/knn/scratch.py)
 
 ---
 
@@ -43,8 +43,8 @@ Complete the [Beginner Path](./beginner.md) or have equivalent knowledge of:
 - Dual formulation
 
 **Resources:**
-- [Theory](../../algorithms/supervised/svm/theory.md)
-- [Implementation](../../algorithms/supervised/svm/scratch.py)
+- [Theory](../../03_algorithms/supervised/svm/theory.md)
+- [Implementation](../../03_algorithms/supervised/svm/scratch.py)
 
 ### Week 6-7: Decision Trees
 - Information gain and entropy
@@ -53,8 +53,8 @@ Complete the [Beginner Path](./beginner.md) or have equivalent knowledge of:
 - Handling continuous features
 
 **Resources:**
-- [Theory](../../algorithms/supervised/decision_trees/theory.md)
-- [Implementation](../../algorithms/supervised/decision_trees/scratch.py)
+- [Theory](../../03_algorithms/supervised/decision_trees/theory.md)
+- [Implementation](../../03_algorithms/supervised/decision_trees/scratch.py)
 
 ---
 
@@ -67,8 +67,8 @@ Complete the [Beginner Path](./beginner.md) or have equivalent knowledge of:
 - Elbow method
 
 **Resources:**
-- [K-Means](../../algorithms/unsupervised/kmeans/)
-- [Hierarchical](../../algorithms/unsupervised/hierarchical_clustering/)
+- [K-Means](../../03_algorithms/unsupervised/kmeans/)
+- [Hierarchical](../../03_algorithms/unsupervised/hierarchical_clustering/)
 
 ### Week 10: Gaussian Mixture Models
 - Probability density estimation
@@ -76,7 +76,7 @@ Complete the [Beginner Path](./beginner.md) or have equivalent knowledge of:
 - Model selection with BIC/AIC
 
 **Resources:**
-- [GMM/EM](../../algorithms/unsupervised/gmm_em/)
+- [GMM/EM](../../03_algorithms/unsupervised/gmm_em/)
 
 ---
 
@@ -88,8 +88,8 @@ Complete the [Beginner Path](./beginner.md) or have equivalent knowledge of:
 - Feature importance
 
 **Resources:**
-- [Random Forest](../../algorithms/ensemble_methods/random_forest/)
-- [Gradient Boosting](../../algorithms/ensemble_methods/gradient_boosting/)
+- [Random Forest](../../03_algorithms/ensemble_methods/random_forest/)
+- [Gradient Boosting](../../03_algorithms/ensemble_methods/gradient_boosting/)
 
 ---
 
@@ -101,8 +101,8 @@ Complete the [Beginner Path](./beginner.md) or have equivalent knowledge of:
 - t-SNE and UMAP for visualization
 
 **Resources:**
-- [PCA](../../dimensionality_reduction/pca/)
-- [t-SNE/UMAP](../../dimensionality_reduction/tsne_umap/)
+- [PCA](../../04_dimensionality_reduction/pca/)
+- [t-SNE/UMAP](../../04_dimensionality_reduction/tsne_umap/)
 
 ---
 

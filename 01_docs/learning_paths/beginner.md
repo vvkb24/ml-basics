@@ -16,12 +16,12 @@ Before starting, ensure you're comfortable with:
 - Create basic visualizations
 
 ### Resources
-1. [Python Refresher](../../foundations/python_refresher.md)
+1. [Python Refresher](../../02_foundations/python_refresher.md)
 2. NumPy Tutorials:
-   - [Arrays](../../foundations/numpy/arrays.ipynb)
-   - [Broadcasting](../../foundations/numpy/broadcasting.ipynb)
-   - [Linear Algebra](../../foundations/numpy/linear_algebra_numpy.ipynb)
-3. [Visualization Basics](../../foundations/matplotlib/visualization_basics.ipynb)
+   - [Arrays](../../02_foundations/numpy/arrays.ipynb)
+   - [Broadcasting](../../02_foundations/numpy/broadcasting.ipynb)
+   - [Linear Algebra](../../02_foundations/numpy/linear_algebra_numpy.ipynb)
+3. [Visualization Basics](../../02_foundations/matplotlib/visualization_basics.ipynb)
 
 ### Exercises
 - [ ] Create and manipulate 1D, 2D, and 3D arrays
@@ -57,9 +57,9 @@ Before starting, ensure you're comfortable with:
 - Implement from scratch and with scikit-learn
 
 ### Resources
-1. [Linear Regression Theory](../../algorithms/supervised/linear_regression/theory.md)
-2. [From-Scratch Implementation](../../algorithms/supervised/linear_regression/scratch.py)
-3. [Experiments Notebook](../../algorithms/supervised/linear_regression/experiments.ipynb)
+1. [Linear Regression Theory](../../03_algorithms/supervised/linear_regression/theory.md)
+2. [From-Scratch Implementation](../../03_algorithms/supervised/linear_regression/scratch.py)
+3. [Experiments Notebook](../../03_algorithms/supervised/linear_regression/experiments.ipynb)
 
 ### Exercises
 - [ ] Derive the normal equation

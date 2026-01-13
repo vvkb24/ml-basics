@@ -20,8 +20,8 @@ Complete the [Intermediate Path](./intermediate.md) or have equivalent knowledge
 - Universal approximation theorem
 
 **Resources:**
-- [Perceptron](../../neural_networks/perceptron/)
-- [Multi-layer NN](../../neural_networks/multilayer_nn/)
+- [Perceptron](../../05_neural_networks/perceptron/)
+- [Multi-layer NN](../../05_neural_networks/multilayer_nn/)
 
 ### Week 3-4: Backpropagation Deep Dive
 - Computational graphs
@@ -30,7 +30,7 @@ Complete the [Intermediate Path](./intermediate.md) or have equivalent knowledge
 - Vanishing/exploding gradients
 
 **Resources:**
-- [Backpropagation](../../neural_networks/backpropagation/)
+- [Backpropagation](../../05_neural_networks/backpropagation/)
 
 ### Week 5: Optimization Methods
 - SGD and momentum
@@ -39,7 +39,7 @@ Complete the [Intermediate Path](./intermediate.md) or have equivalent knowledge
 - Batch normalization
 
 **Resources:**
-- [Optimization](../../neural_networks/optimization_methods/)
+- [Optimization](../../05_neural_networks/optimization_methods/)
 
 ---
 
@@ -52,7 +52,7 @@ Complete the [Intermediate Path](./intermediate.md) or have equivalent knowledge
 - Modern architectures (ResNet, Inception)
 
 **Resources:**
-- [CNN](../../deep_learning/cnn/)
+- [CNN](../../06_deep_learning/cnn/)
 
 ### Week 8: CNN Applications
 - Image classification
@@ -70,8 +70,8 @@ Complete the [Intermediate Path](./intermediate.md) or have equivalent knowledge
 - Bidirectional RNNs
 
 **Resources:**
-- [RNN](../../deep_learning/rnn/)
-- [LSTM/GRU](../../deep_learning/lstm_gru/)
+- [RNN](../../06_deep_learning/rnn/)
+- [LSTM/GRU](../../06_deep_learning/lstm_gru/)
 
 ---
 
@@ -83,8 +83,8 @@ Complete the [Intermediate Path](./intermediate.md) or have equivalent knowledge
 - Multi-head attention
 
 **Resources:**
-- [Attention](../../deep_learning/attention/)
-- [Self-Attention](../../transformers/self_attention/)
+- [Attention](../../06_deep_learning/attention/)
+- [Self-Attention](../../07_transformers/self_attention/)
 
 ### Week 13-14: Transformers
 - Positional encoding
@@ -93,9 +93,9 @@ Complete the [Intermediate Path](./intermediate.md) or have equivalent knowledge
 - Fine-tuning strategies
 
 **Resources:**
-- [Transformer from Scratch](../../transformers/transformer_from_scratch/)
-- [Positional Encoding](../../transformers/positional_encoding/)
-- [LLM Fundamentals](../../transformers/llm_fundamentals/)
+- [Transformer from Scratch](../../07_transformers/transformer_from_scratch/)
+- [Positional Encoding](../../07_transformers/positional_encoding/)
+- [LLM Fundamentals](../../07_transformers/llm_fundamentals/)
 
 ---
 
@@ -108,8 +108,8 @@ Complete the [Intermediate Path](./intermediate.md) or have equivalent knowledge
 - Fine-tuning LLMs
 
 **Resources:**
-- [Text Generation](../../applications/llm_apps/text_generation.ipynb)
-- [RAG Pipeline](../../applications/llm_apps/rag_pipeline.md)
+- [Text Generation](../../09_applications/llm_apps/text_generation.ipynb)
+- [RAG Pipeline](../../09_applications/llm_apps/rag_pipeline.md)
 
 ---
 
