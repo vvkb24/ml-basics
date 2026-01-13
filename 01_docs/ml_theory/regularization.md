@@ -53,6 +53,9 @@ $$\Omega(\theta) = \alpha\|\theta\|_1 + \frac{1-\alpha}{2}\|\theta\|_2^2$$
 
 Gets benefits of both L1 (sparsity) and L2 (stability).
 
+![L1 vs L2 Regularization](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Regularization.svg/600px-Regularization.svg.png)
+*Geometric interpretation: L1 constraint (diamond) hits corners (sparse), L2 constraint (circle) is smooth — Source: [Wikipedia](https://en.wikipedia.org/wiki/Regularization_(mathematics))*
+
 ---
 
 ## 3. Why This Formulation?

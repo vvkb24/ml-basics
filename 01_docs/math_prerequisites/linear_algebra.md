@@ -127,6 +127,9 @@ $$\mathbf{A}\mathbf{v} = \lambda\mathbf{v}$$
 
 where $\lambda$ is the corresponding eigenvalue.
 
+![Eigenvector Visualization](https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Eigenvalue_equation.svg/400px-Eigenvalue_equation.svg.png)
+*Eigenvector (red) only gets scaled, not rotated — Source: [Wikipedia](https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors)*
+
 ### Computing Eigenvalues
 
 Solve the characteristic equation:
