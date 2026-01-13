@@ -181,7 +181,7 @@ $$\mathcal{L}_{LM} = -\mathbb{E}_{x \sim \mathcal{D}}\left[\sum_{t=1}^{T} \log P
 **Causal Masking:**
 
 Attention matrix $A$ is masked:
-$$\tilde{A}_{ij} = \begin{cases} A_{ij} & \text{if } j \leq i \\ -\infty & \text{if } j > i \end{cases}$$
+When $j \leq i$: $\tilde{A}_{ij} = A_{ij}$, otherwise $\tilde{A}_{ij} = -\infty$
 
 This ensures $P(x_t | x_{<t})$ only depends on past tokens.
 
@@ -227,10 +227,11 @@ Decouples weight decay from gradient-based updates.
 
 Warmup + cosine decay:
 
-$$\eta(t) = \begin{cases}
-\eta_{max} \cdot \frac{t}{T_{warmup}} & \text{if } t < T_{warmup} \\
-\eta_{min} + \frac{\eta_{max} - \eta_{min}}{2}\left(1 + \cos\left(\frac{\pi(t - T_{warmup})}{T_{total} - T_{warmup}}\right)\right) & \text{otherwise}
-\end{cases}$$
+For $t < T_{warmup}$:
+$$\eta(t) = \eta_{max} \cdot \frac{t}{T_{warmup}}$$
+
+Otherwise:
+$$\eta(t) = \eta_{min} + \frac{\eta_{max} - \eta_{min}}{2}\left(1 + \cos\left(\frac{\pi(t - T_{warmup})}{T_{total} - T_{warmup}}\right)\right)$$
 
 Typical: warmup = 2000 steps, final LR = 0.1 × peak.
 
@@ -416,7 +417,7 @@ Better for translation, worse for open-ended generation.
 
 Sample from top $k$ tokens:
 
-$$P_{top-k}(x_t | x_{<t}) \propto \begin{cases} P_\theta(x_t | x_{<t}) & \text{if } x_t \in \text{top-}k \\ 0 & \text{otherwise} \end{cases}$$
+If $x_t \in \text{top-}k$: $P_{top-k}(x_t | x_{<t}) \propto P_\theta(x_t | x_{<t})$, otherwise $P_{top-k}(x_t | x_{<t}) = 0$
 
 #### 8.4 Nucleus (Top-p) Sampling
 

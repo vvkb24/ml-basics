@@ -270,7 +270,7 @@ $$\text{CrossAttention}(X_{dec}, X_{enc}) = \text{Attention}(X_{dec}W^Q, X_{enc}
 
 For autoregressive generation, prevent looking at future:
 
-$$\tilde{S}_{ij} = \begin{cases} S_{ij} & \text{if } j \leq i \\ -\infty & \text{if } j > i \end{cases}$$
+When $j \leq i$: $\tilde{S}_{ij} = S_{ij}$, otherwise $\tilde{S}_{ij} = -\infty$
 
 After softmax, future positions have zero weight.
 
