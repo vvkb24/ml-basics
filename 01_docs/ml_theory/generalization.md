@@ -38,6 +38,15 @@ Large gap → Overfitting
 
 Plotting error vs. training set size:
 
+```mermaid
+xychart-beta
+    title "Learning Curves"
+    x-axis "Training Set Size" [Small, "", "", Medium, "", "", Large]
+    y-axis "Error" 0 --> 100
+    line "Training Error" [10, 20, 30, 40, 45, 48, 50]
+    line "Test Error" [95, 80, 65, 55, 52, 51, 50]
+```
+
 **Learning Curve Behavior:**
 
 | Training Set Size | Training Error | Test Error | Gap |
@@ -100,6 +109,14 @@ with polynomial sample complexity.
 ## Double Descent
 
 Modern observation in deep learning:
+
+```mermaid
+xychart-beta
+    title "Double Descent Phenomenon"
+    x-axis "Model Parameters" [Few, "", Threshold, "", Many, "", Lots]
+    y-axis "Test Error" 0 --> 100
+    line "Test Error" [70, 45, 30, 85, 50, 35, 25]
+```
 
 **The Three Regimes:**
 

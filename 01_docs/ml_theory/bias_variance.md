@@ -91,11 +91,23 @@ $$= \text{Bias}^2 + \text{Variance}$$
 
 As model complexity increases:
 
+```mermaid
+xychart-beta
+    title "Bias-Variance Tradeoff"
+    x-axis [Simple, "", "", Optimal, "", "", Complex]
+    y-axis "Error" 0 --> 100
+    line "Total Error" [85, 60, 40, 30, 40, 60, 85]
+    line "Bias²" [75, 55, 40, 28, 18, 10, 5]
+    line "Variance" [5, 10, 15, 22, 40, 60, 85]
+```
+
 | Complexity | Bias² | Variance | Total Error |
 |------------|-------|----------|-------------|
 | Low (Underfit) | High | Low | High |
 | Optimal | Medium | Medium | **Minimum** |
 | High (Overfit) | Low | High | High |
+
+> **Visual Reference**: See [Stanford CS229 Bias-Variance](https://cs229.stanford.edu/notes2022fall/main_notes.pdf) for detailed treatment.
 
 **Key Insight**: The U-shaped curve shows total error is minimized at an intermediate complexity level where bias and variance are balanced.
 

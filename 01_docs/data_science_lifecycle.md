@@ -2,6 +2,18 @@
 
 A comprehensive, practitioner-focused treatment of the data science lifecycle from problem framing to production monitoring.
 
+```mermaid
+flowchart LR
+    A[Problem Framing] --> B[Data Collection]
+    B --> C[Data Understanding]
+    C --> D[EDA]
+    D --> E[Feature Engineering]
+    E --> F[Modeling]
+    F --> G[Evaluation]
+    G --> H[Deployment]
+    H -.->|Monitoring & Feedback| A
+```
+
 ---
 
 ## Part I: Problem Framing
@@ -398,17 +410,15 @@ X_interact = poly.fit_transform(X)
 
 ### 6.2 Model Complexity Control
 
-**Complexity vs Performance**:
-```
-Performance
-    ↑
-    |        ____
-    |      /      \
-    |     /        \
-    |    /          \
-    |___/____________\___→ Complexity
-       Simple    Overfit
-```
+**Complexity vs Performance (Inverted U-Shape):**
+
+| Complexity Level | Training Performance | Validation Performance | Status |
+|------------------|----------------------|------------------------|--------|
+| Too Simple | Low | Low | Underfitting |
+| Optimal | High | High | Best generalization |
+| Too Complex | Very High | Low | Overfitting |
+
+**Key Insight**: Performance on training data keeps increasing with complexity, but validation performance peaks at the optimal level and then decreases.
 
 **Control Mechanisms**:
 - Regularization (L1, L2)
