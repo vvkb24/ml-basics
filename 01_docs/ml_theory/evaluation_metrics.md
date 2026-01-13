@@ -103,6 +103,9 @@ $$\text{Specificity} = \frac{TN}{TN + FP}$$
 
 Plot **True Positive Rate** vs. **False Positive Rate** at various thresholds.
 
+![ROC Curve](https://scikit-learn.org/stable/_images/sphx_glr_plot_roc_001.png)
+*Source: [scikit-learn documentation](https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html)*
+
 **ROC Curve Interpretation:**
 - **X-axis**: False Positive Rate (FPR) from 0 to 1
 - **Y-axis**: True Positive Rate (TPR) from 0 to 1

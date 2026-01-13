@@ -38,6 +38,9 @@ Large gap → Overfitting
 
 Plotting error vs. training set size:
 
+![Learning Curves](https://scikit-learn.org/stable/_images/sphx_glr_plot_learning_curve_001.png)
+*Source: [scikit-learn documentation](https://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html)*
+
 **Learning Curve Behavior:**
 
 | Training Set Size | Training Error | Test Error | Gap |

@@ -91,13 +91,14 @@ $$= \text{Bias}^2 + \text{Variance}$$
 
 As model complexity increases:
 
+![Bias-Variance Tradeoff](https://scikit-learn.org/stable/_images/sphx_glr_plot_underfitting_overfitting_001.png)
+*Source: [scikit-learn documentation](https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html)*
+
 | Complexity | Bias² | Variance | Total Error |
 |------------|-------|----------|-------------|
 | Low (Underfit) | High | Low | High |
 | Optimal | Medium | Medium | **Minimum** |
 | High (Overfit) | Low | High | High |
-
-> **Visual Reference**: See [Stanford CS229 Bias-Variance](https://cs229.stanford.edu/notes2022fall/main_notes.pdf) for detailed treatment.
 
 **Key Insight**: The U-shaped curve shows total error is minimized at an intermediate complexity level where bias and variance are balanced.
 
