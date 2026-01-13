@@ -354,3 +354,4 @@ Soft attention transformers are computationally universal under reasonable assum
 - [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
 - [Attention? Attention!](https://lilianweng.github.io/posts/2018-06-24-attention/)
 - [3Blue1Brown: Attention in Transformers](https://www.youtube.com/watch?v=eMlx5fFNoYc)
+

@@ -12,18 +12,18 @@ A comprehensive, research-level treatment of Large Language Models covering arch
 
 A language model defines a probability distribution over sequences of tokens from vocabulary $\mathcal{V}$:
 
-$$P_\theta(x_1, x_2, ..., x_T) = \prod_{t=1}^{T} P_\theta(x_t | x_{<t})$$
+$$P_\theta(x_1, x_2, ..., x_T) = \prod_{t=1}^{T} P_\theta(x_t | x_{1:t-1})$$
 
 Where:
 - $x_t \in \mathcal{V}$ is the token at position $t$
-- $x_{<t} = (x_1, ..., x_{t-1})$ is the context
+- $x_{1:t-1} = (x_1, ..., x_{t-1})$ is the context
 - $\theta$ are model parameters
 
 #### 1.2 Cross-Entropy Loss
 
 Training minimizes the negative log-likelihood:
 
-$$\mathcal{L}(\theta) = -\frac{1}{T}\sum_{t=1}^{T} \log P_\theta(x_t | x_{<t})$$
+$$\mathcal{L}(\theta) = -\frac{1}{T}\sum_{t=1}^{T} \log P_\theta(x_t | x_{1:t-1})$$
 
 This is equivalent to minimizing cross-entropy between the true distribution $P_{data}$ and model distribution $P_\theta$:
 
@@ -33,7 +33,7 @@ $$H(P_{data}, P_\theta) = -\mathbb{E}_{x \sim P_{data}}[\log P_\theta(x)]$$
 
 Perplexity measures how "surprised" the model is:
 
-$$\text{PPL} = \exp\left(-\frac{1}{T}\sum_{t=1}^{T} \log P_\theta(x_t | x_{<t})\right) = \exp(\mathcal{L})$$
+$$\text{PPL} = \exp\left(-\frac{1}{T}\sum_{t=1}^{T} \log P_\theta(x_t | x_{1:t-1})\right) = \exp(\mathcal{L})$$
 
 **Interpretation**:
 - PPL = 1: Perfect prediction
@@ -176,14 +176,14 @@ Removes mean subtraction → 15% faster, similar performance.
 #### 3.1 Next Token Prediction
 
 **Objective:**
-$$\mathcal{L}_{LM} = -\mathbb{E}_{x \sim \mathcal{D}}\left[\sum_{t=1}^{T} \log P_\theta(x_t | x_{<t})\right]$$
+$$\mathcal{L}_{LM} = -\mathbb{E}_{x \sim \mathcal{D}}\left[\sum_{t=1}^{T} \log P_\theta(x_t | x_{1:t-1})\right]$$
 
 **Causal Masking:**
 
 Attention matrix $A$ is masked:
 When $j \leq i$: $\tilde{A}_{ij} = A_{ij}$, otherwise $\tilde{A}_{ij} = -\infty$
 
-This ensures $P(x_t | x_{<t})$ only depends on past tokens.
+This ensures $P(x_t | x_{1:t-1})$ only depends on past tokens.
 
 #### 3.2 Training Data Composition
 
@@ -267,7 +267,7 @@ Enables training 100B+ models.
 
 Train on (instruction, response) pairs:
 
-$$\mathcal{L}_{SFT} = -\sum_{t=1}^{T_{response}} \log P_\theta(y_t | x_{instruction}, y_{<t})$$
+$$\mathcal{L}_{SFT} = -\sum_{t=1}^{T_{response}} \log P_\theta(y_t | x_{instruction}, y_{1:t-1})$$
 
 Only compute loss on response tokens, not instruction.
 
@@ -401,7 +401,7 @@ Speedup: ~2-3x with 10-20% overhead.
 
 #### 8.1 Greedy Decoding
 
-$$x_t = \arg\max_{x} P_\theta(x | x_{<t})$$
+$$x_t = \arg\max_{x} P_\theta(x | x_{1:t-1})$$
 
 Fast but often repetitive/boring.
 
@@ -409,7 +409,7 @@ Fast but often repetitive/boring.
 
 Maintain $k$ best partial sequences:
 
-$$\text{score}(x_{1:t}) = \sum_{i=1}^{t} \log P_\theta(x_i | x_{<i})$$
+$$\text{score}(x_{1:t}) = \sum_{i=1}^{t} \log P_\theta(x_i | x_{1:i-1})$$
 
 Better for translation, worse for open-ended generation.
 
@@ -417,19 +417,19 @@ Better for translation, worse for open-ended generation.
 
 Sample from top $k$ tokens:
 
-If $x_t \in \text{top-}k$: $P_{top-k}(x_t | x_{<t}) \propto P_\theta(x_t | x_{<t})$, otherwise $P_{top-k}(x_t | x_{<t}) = 0$
+If $x_t \in \text{top-}k$: $P_{top-k}(x_t | x_{1:t-1}) \propto P_\theta(x_t | x_{1:t-1})$, otherwise $P_{top-k}(x_t | x_{1:t-1}) = 0$
 
 #### 8.4 Nucleus (Top-p) Sampling
 
 Sample from smallest set with cumulative probability $\geq p$:
 
-$$V_p = \text{smallest } V \text{ s.t. } \sum_{x \in V} P_\theta(x | x_{<t}) \geq p$$
+$$V_p = \text{smallest } V \text{ s.t. } \sum_{x \in V} P_\theta(x | x_{1:t-1}) \geq p$$
 
 More adaptive than top-k.
 
 #### 8.5 Temperature Scaling
 
-$$P_{temp}(x_t | x_{<t}) = \frac{\exp(\text{logit}_t / \tau)}{\sum_{x'} \exp(\text{logit}_{x'} / \tau)}$$
+$$P_{temp}(x_t | x_{1:t-1}) = \frac{\exp(\text{logit}_t / \tau)}{\sum_{x'} \exp(\text{logit}_{x'} / \tau)}$$
 
 - $\tau < 1$: Sharper (more deterministic)
 - $\tau > 1$: Flatter (more random)
@@ -502,3 +502,6 @@ Self-improvement through AI feedback:
 - "Speech and Language Processing" - Jurafsky & Martin (ch. 10-11)
 - "Deep Learning" - Goodfellow, Bengio, Courville
 - "Understanding Deep Learning" - Simon Prince (2023)
+
+
+
