@@ -36,23 +36,122 @@ This repository bridges the gap between mathematical theory and practical implem
 ```
 ml-math-and-applications/
 │
-├── docs/                      # Learning paths, prerequisites, theory
-├── foundations/               # NumPy, Matplotlib, Python refresher
+├── README.md                       # This file
+├── ROADMAP.md                      # Development milestones
+├── CONTRIBUTING.md                 # Contribution guidelines
+├── requirements.txt                # Python dependencies
+├── environment.yml                 # Conda environment
+│
+├── docs/                           # Documentation
+│   ├── index.md                    # Documentation home
+│   ├── glossary.md                 # ML terms glossary
+│   ├── faq.md                      # Frequently asked questions
+│   ├── learning_paths/             # Structured curricula
+│   │   ├── beginner.md
+│   │   ├── intermediate.md
+│   │   └── advanced.md
+│   ├── math_prerequisites/         # Mathematical foundations
+│   │   ├── linear_algebra.md
+│   │   ├── probability.md
+│   │   ├── statistics.md
+│   │   ├── calculus.md
+│   │   └── optimization.md
+│   └── ml_theory/                  # Core ML concepts
+│       ├── bias_variance.md
+│       ├── generalization.md
+│       ├── regularization.md
+│       └── evaluation_metrics.md
+│
+├── foundations/                    # Prerequisites
+│   ├── python_refresher.md
+│   ├── numpy/
+│   │   ├── arrays.ipynb
+│   │   ├── broadcasting.ipynb
+│   │   └── linear_algebra_numpy.ipynb
+│   └── matplotlib/
+│       └── visualization_basics.ipynb
+│
 ├── algorithms/
-│   ├── supervised/            # Linear regression, logistic regression, SVM, etc.
-│   ├── unsupervised/          # K-means, GMM, hierarchical clustering
-│   └── ensemble_methods/      # Random forest, gradient boosting, XGBoost
-├── dimensionality_reduction/  # PCA, LDA, t-SNE, UMAP
-├── neural_networks/           # Perceptron, MLP, backpropagation
-├── deep_learning/             # CNN, RNN, LSTM, attention
-├── transformers/              # Self-attention, transformers from scratch
-├── frameworks/                # scikit-learn, PyTorch, TensorFlow guides
-├── applications/              # Real-world projects
-├── experiments/               # Ablation studies, benchmarking
-├── utils/                     # Helper functions
-├── tests/                     # Unit tests
-└── references/                # Books, papers, resources
+│   ├── supervised/
+│   │   ├── linear_regression/      # ✅ Complete implementation
+│   │   │   ├── README.md
+│   │   │   ├── theory.md
+│   │   │   ├── scratch.py
+│   │   │   ├── sklearn_impl.py
+│   │   │   └── experiments.ipynb
+│   │   ├── logistic_regression/    # Stub
+│   │   ├── knn/                    # Stub
+│   │   ├── svm/                    # Stub
+│   │   └── decision_trees/         # Stub
+│   ├── unsupervised/
+│   │   ├── kmeans/                 # Stub
+│   │   ├── hierarchical_clustering/ # Stub
+│   │   └── gmm_em/                 # Stub
+│   └── ensemble_methods/
+│       ├── random_forest/          # Stub
+│       ├── gradient_boosting/      # Stub
+│       └── xgboost/                # Stub
+│
+├── dimensionality_reduction/
+│   ├── pca/                        # Stub
+│   ├── lda/                        # Stub
+│   └── tsne_umap/                  # Stub
+│
+├── neural_networks/
+│   ├── perceptron/                 # Stub
+│   ├── multilayer_nn/              # Stub
+│   ├── backpropagation/            # Stub
+│   └── optimization_methods/       # Stub
+│
+├── deep_learning/
+│   ├── cnn/                        # Stub
+│   ├── rnn/                        # Stub
+│   ├── lstm_gru/                   # Stub
+│   └── attention/                  # Stub
+│
+├── transformers/
+│   ├── self_attention/             # Stub
+│   ├── transformer_from_scratch/   # Stub
+│   ├── positional_encoding/        # Stub
+│   └── llm_fundamentals/           # Stub
+│
+├── frameworks/
+│   ├── scikit_learn/
+│   │   └── pipelines_and_models.ipynb
+│   ├── pytorch/
+│   │   ├── tensors_autograd.ipynb
+│   │   ├── training_loop.py
+│   │   └── custom_datasets.py
+│   └── tensorflow/
+│       └── keras_models.ipynb
+│
+├── applications/
+│   ├── regression/                 # Stub
+│   └── llm_apps/                   # Stub
+│
+├── utils/
+│   ├── metrics.py                  # Evaluation metrics
+│   ├── plotting.py                 # Visualization helpers
+│   ├── data_loader.py              # Data utilities
+│   └── math_helpers.py             # Math functions
+│
+├── tests/
+│   ├── test_algorithms.py
+│   ├── test_utils.py
+│   └── test_models.py
+│
+├── experiments/                    # Ablation studies, benchmarks
+│
+├── references/
+│   ├── books.md
+│   ├── papers.md
+│   └── online_resources.md
+│
+└── .github/
+    ├── workflows/ci.yml            # CI/CD
+    └── ISSUE_TEMPLATE.md
 ```
+
 
 ## 🚀 Quick Start
 
