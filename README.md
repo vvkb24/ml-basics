@@ -9,6 +9,7 @@
 
 <p align="center">
   <strong>A comprehensive, mathematically rigorous guide to machine learning — from first principles to production.</strong>
+  <strong>If you feel something is missing in this, dont wait addddddd</strong>
 </p>
 
 ---
