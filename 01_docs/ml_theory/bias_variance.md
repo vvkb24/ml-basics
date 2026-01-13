@@ -91,18 +91,13 @@ $$= \text{Bias}^2 + \text{Variance}$$
 
 As model complexity increases:
 
-```
-Error
-  ↑
-  │    X                         X
-  │     X                       X
-  │      X    Total Error      X
-  │       X       ↘          X
-  │        X        →  ←   X
-  │         X  Bias²  ↘  X ← Variance
-  │──────────X──────X───────────→ Complexity
-       Underfit  Optimal  Overfit
-```
+| Complexity | Bias² | Variance | Total Error |
+|------------|-------|----------|-------------|
+| Low (Underfit) | High | Low | High |
+| Optimal | Medium | Medium | **Minimum** |
+| High (Overfit) | Low | High | High |
+
+**Key Insight**: The U-shaped curve shows total error is minimized at an intermediate complexity level where bias and variance are balanced.
 
 ### Finding Optimal Complexity
 
@@ -193,17 +188,16 @@ For very overparameterized models (deep learning):
 - Test error decreases, then increases (classical)
 - Then decreases again in highly overparameterized regime!
 
-```
-Error
-  ↑
-  │    \
-  │     \    /\
-  │      \  /  \
-  │       \/    \____
-  │──────────────────→ Complexity
-     Classical   Interpolation
-      regime       regime
-```
+**Double Descent Curve Shape:**
+1. **Classical regime**: Error decreases then increases (U-shape)
+2. **Interpolation threshold**: Peak error when model barely fits training data  
+3. **Over-parameterized regime**: Error decreases again as model capacity grows
+
+| Phase | Parameters | Training Error | Test Error |
+|-------|------------|----------------|------------|
+| Underparameterized | < data points | Medium | Medium-High |
+| Interpolation threshold | ≈ data points | Zero | **Peak** |
+| Overparameterized | >> data points | Zero | Decreasing |
 
 **Explanation**: Very large models are implicitly regularized by optimization (SGD finds "simple" solutions).
 

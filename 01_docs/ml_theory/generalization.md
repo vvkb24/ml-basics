@@ -38,18 +38,18 @@ Large gap → Overfitting
 
 Plotting error vs. training set size:
 
-```
-Error
-  │
-  │  ╲  Training Error
-  │   ╲  ─────────────
-  │    ──────────────────
-  │
-  │    ╱  Test Error
-  │   ╱ - - - - - - - - -
-  │  ╱─────────────────────
-  └────────────────────────► Training Set Size
-```
+**Learning Curve Behavior:**
+
+| Training Set Size | Training Error | Test Error | Gap |
+|-------------------|----------------|------------|-----|
+| Very small | Low (overfits) | High | Large |
+| Medium | Increasing | Decreasing | Moderate |
+| Large | Asymptotic | Asymptotic | Small |
+
+**Key patterns:**
+- Training error **starts low** (easy to fit few points) and **increases** toward asymptote
+- Test error **starts high** and **decreases** toward asymptote
+- As n → ∞, both converge (gap closes)
 
 **Interpretation:**
 - Converging curves → Good generalization
@@ -101,19 +101,17 @@ with polynomial sample complexity.
 
 Modern observation in deep learning:
 
-```
-Error
-  │
-  │     ╱╲      Classical U-curve
-  │    ╱  ╲
-  │   ╱    ╲    ╱ Double descent
-  │  ╱      ╲  ╱
-  │ ╱        ╲╱
-  └────────────────────► Model Parameters
-         ↑
-    Interpolation
-      threshold
-```
+**The Three Regimes:**
+
+| Regime | Model Size | Behavior |
+|--------|------------|----------|
+| **Classical** | Small → Medium | U-shaped curve (bias-variance tradeoff) |
+| **Interpolation threshold** | ≈ Training samples | Peak test error |
+| **Overparameterized** | >> Training samples | Error decreases again |
+
+**Why it happens:**
+- At interpolation threshold: Model barely fits data, very sensitive to noise
+- Beyond threshold: Many solutions exist, optimization finds "simpler" ones
 
 After the interpolation threshold, larger models may generalize better.
 
