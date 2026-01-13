@@ -1,273 +1,430 @@
-# Linear Regression: Mathematical Theory
+# Linear Regression: Complete Mathematical Theory
 
-This document provides a complete mathematical treatment of linear regression.
+A rigorous, research-level treatment of linear regression covering all theoretical perspectives required for deep understanding.
 
 ---
 
 ## 1. Problem Definition
 
-**Goal:** Given training data $\{(\mathbf{x}_i, y_i)\}_{i=1}^{n}$ where $\mathbf{x}_i \in \mathbb{R}^d$ and $y_i \in \mathbb{R}$, find a linear function that predicts $y$ from $\mathbf{x}$.
+### What Problem Is Being Solved?
 
-**Model:**
-$$\hat{y} = \theta_0 + \theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_d x_d = \boldsymbol{\theta}^T \mathbf{x}$$
+Given paired observations $(x_i, y_i)$ where $x_i \in \mathbb{R}^d$ and $y_i \in \mathbb{R}$, find a function $f: \mathbb{R}^d \to \mathbb{R}$ that predicts $y$ from $x$.
 
-**Matrix Form:**
-$$\hat{\mathbf{y}} = \mathbf{X}\boldsymbol{\theta}$$
+**The Linear Assumption**: We restrict $f$ to be linear:
+$$f(x) = w^T x + b = \sum_{j=1}^d w_j x_j + b$$
 
-where:
-- $\mathbf{X} \in \mathbb{R}^{n \times (d+1)}$: Design matrix with bias column
-- $\boldsymbol{\theta} \in \mathbb{R}^{d+1}$: Parameter vector
-- $\hat{\mathbf{y}} \in \mathbb{R}^n$: Predictions
+### Why Is This Problem Non-Trivial?
 
----
-
-## 2. Assumptions
-
-Linear regression assumes:
-
-1. **Linearity:** $E[y|\mathbf{x}] = \boldsymbol{\theta}^T\mathbf{x}$
-2. **Independence:** Observations are independent
-3. **Homoscedasticity:** Constant variance: $\text{Var}(\epsilon) = \sigma^2$
-4. **No multicollinearity:** Features are not perfectly correlated
-5. **Normality (for inference):** $\epsilon \sim \mathcal{N}(0, \sigma^2)$
+1. **Noise**: Observations contain measurement error: $y_i = f(x_i) + \epsilon_i$
+2. **Finite Data**: We have $n$ samples but want to generalize to unseen data
+3. **Dimensionality**: When $d > n$, infinitely many solutions exist
+4. **Model Misspecification**: True relationship may be nonlinear
+5. **Multicollinearity**: Features may be correlated, making attribution ambiguous
 
 ---
 
-## 3. Loss Function
+## 2. Mathematical Formulation
 
-### Mean Squared Error (MSE)
+### Notation
 
-$$\mathcal{L}(\boldsymbol{\theta}) = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2 = \frac{1}{n}\|\mathbf{y} - \mathbf{X}\boldsymbol{\theta}\|_2^2$$
+| Symbol | Meaning |
+|--------|---------|
+| $X \in \mathbb{R}^{n \times d}$ | Design matrix (n samples, d features) |
+| $y \in \mathbb{R}^n$ | Target vector |
+| $w \in \mathbb{R}^d$ | Weight vector |
+| $b \in \mathbb{R}$ | Bias (intercept) |
+| $\hat{y} = Xw + b$ | Predictions |
+| $\epsilon = y - \hat{y}$ | Residuals |
 
-**Why MSE?**
-- Penalizes large errors more heavily
-- Mathematically convenient (differentiable)
-- Maximum likelihood estimate under Gaussian noise
+### Objective Function: Ordinary Least Squares (OLS)
 
-### Expanded Form
+$$\mathcal{L}(w) = \frac{1}{2n}\sum_{i=1}^n (y_i - w^T x_i)^2 = \frac{1}{2n}\|y - Xw\|_2^2$$
 
-$$\mathcal{L}(\boldsymbol{\theta}) = \frac{1}{n}(\mathbf{y} - \mathbf{X}\boldsymbol{\theta})^T(\mathbf{y} - \mathbf{X}\boldsymbol{\theta})$$
+**Why Squared Error?**
+1. Differentiable everywhere (unlike absolute error)
+2. Penalizes large errors more heavily
+3. Has closed-form solution
+4. Maximum likelihood under Gaussian noise assumption
 
-$$= \frac{1}{n}(\mathbf{y}^T\mathbf{y} - 2\boldsymbol{\theta}^T\mathbf{X}^T\mathbf{y} + \boldsymbol{\theta}^T\mathbf{X}^T\mathbf{X}\boldsymbol{\theta})$$
+### The Normal Equation
 
----
+Setting $\nabla_w \mathcal{L} = 0$:
 
-## 4. Maximum Likelihood Derivation
+$$\nabla_w \mathcal{L} = -\frac{1}{n}X^T(y - Xw) = 0$$
 
-Assume Gaussian noise: $y = \boldsymbol{\theta}^T\mathbf{x} + \epsilon$ where $\epsilon \sim \mathcal{N}(0, \sigma^2)$
+$$X^T Xw = X^T y$$
 
-**Likelihood:**
-$$P(y|\mathbf{x}, \boldsymbol{\theta}) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(y - \boldsymbol{\theta}^T\mathbf{x})^2}{2\sigma^2}\right)$$
+$$w^* = (X^T X)^{-1} X^T y$$
 
-**Log-likelihood (i.i.d. samples):**
-$$\log P(\mathbf{y}|\mathbf{X}, \boldsymbol{\theta}) = \sum_{i=1}^{n} \log P(y_i|\mathbf{x}_i, \boldsymbol{\theta})$$
-
-$$= -\frac{n}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_{i=1}^{n}(y_i - \boldsymbol{\theta}^T\mathbf{x}_i)^2$$
-
-**Maximizing log-likelihood ≡ Minimizing MSE**
-
----
-
-## 5. Normal Equation (Closed-Form Solution)
-
-### Derivation
-
-Set gradient to zero:
-
-$$\nabla_{\boldsymbol{\theta}}\mathcal{L} = \frac{1}{n}(-2\mathbf{X}^T\mathbf{y} + 2\mathbf{X}^T\mathbf{X}\boldsymbol{\theta}) = 0$$
-
-$$\mathbf{X}^T\mathbf{X}\boldsymbol{\theta} = \mathbf{X}^T\mathbf{y}$$
-
-### Solution
-
-$$\boxed{\boldsymbol{\theta}^* = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}}$$
-
-### Conditions
-
-- $\mathbf{X}^T\mathbf{X}$ must be invertible
-- Requires $n \geq d$ and linearly independent features
-- Computational complexity: $O(nd^2 + d^3)$
-
-### Verification: Second Derivative
-
-$$\nabla^2_{\boldsymbol{\theta}}\mathcal{L} = \frac{2}{n}\mathbf{X}^T\mathbf{X}$$
-
-This is positive semi-definite, confirming a minimum.
+This is the **optimal weight vector** (if $X^TX$ is invertible).
 
 ---
 
-## 6. Gradient Descent
+## 3. Why This Formulation?
 
-When $d$ is large, computing and inverting $\mathbf{X}^T\mathbf{X}$ is expensive.
+### Assumptions That Justify OLS
 
-### Gradient
+1. **Linearity**: $\mathbb{E}[y|x] = w^Tx$ (correct model specification)
+2. **Independence**: Observations are independent
+3. **Homoscedasticity**: $\text{Var}(\epsilon_i) = \sigma^2$ (constant variance)
+4. **No multicollinearity**: $X^TX$ is invertible (full column rank)
+5. **Gaussian errors** (for inference): $\epsilon_i \sim \mathcal{N}(0, \sigma^2)$
 
-$$\nabla_{\boldsymbol{\theta}}\mathcal{L} = \frac{2}{n}\mathbf{X}^T(\mathbf{X}\boldsymbol{\theta} - \mathbf{y})$$
+### What Breaks If Assumptions Fail?
 
-### Update Rule
+| Assumption | Violation | Consequence |
+|------------|-----------|-------------|
+| Linearity | Nonlinear relationship | Systematic bias, poor predictions |
+| Independence | Time series, clustering | Underestimated standard errors |
+| Homoscedasticity | Heteroscedastic errors | Inefficient estimates |
+| No multicollinearity | Correlated features | Unstable coefficients, large variance |
+| Gaussian errors | Heavy-tailed noise | Outliers dominate solution |
 
-$$\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta \cdot \frac{2}{n}\mathbf{X}^T(\mathbf{X}\boldsymbol{\theta}_t - \mathbf{y})$$
+### Alternatives to OLS
 
-### Stochastic Gradient Descent (SGD)
-
-Use single sample or mini-batch:
-
-$$\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta \cdot 2(\hat{y}_i - y_i)\mathbf{x}_i$$
-
-### Complexity
-
-- Per iteration: $O(nd)$
-- Total: $O(ndk)$ for $k$ iterations
-
----
-
-## 7. Regularization
-
-### Ridge Regression (L2)
-
-Add L2 penalty to prevent large weights:
-
-$$\mathcal{L}_{\text{ridge}} = \frac{1}{n}\|\mathbf{y} - \mathbf{X}\boldsymbol{\theta}\|_2^2 + \lambda\|\boldsymbol{\theta}\|_2^2$$
-
-**Closed-form solution:**
-$$\boldsymbol{\theta}^*_{\text{ridge}} = (\mathbf{X}^T\mathbf{X} + \lambda\mathbf{I})^{-1}\mathbf{X}^T\mathbf{y}$$
-
-**Benefits:**
-- Always invertible (even when $n < d$)
-- Shrinks weights toward zero
-- Reduces variance at cost of bias
-
-### Lasso Regression (L1)
-
-$$\mathcal{L}_{\text{lasso}} = \frac{1}{n}\|\mathbf{y} - \mathbf{X}\boldsymbol{\theta}\|_2^2 + \lambda\|\boldsymbol{\theta}\|_1$$
-
-**Properties:**
-- Produces sparse solutions (feature selection)
-- No closed-form solution (use coordinate descent)
-
-### Elastic Net
-
-$$\mathcal{L}_{\text{elastic}} = \frac{1}{n}\|\mathbf{y} - \mathbf{X}\boldsymbol{\theta}\|_2^2 + \lambda_1\|\boldsymbol{\theta}\|_1 + \lambda_2\|\boldsymbol{\theta}\|_2^2$$
+| Method | When to Use |
+|--------|-------------|
+| Ridge Regression | Multicollinearity, high dimensions |
+| Lasso | Feature selection needed |
+| Huber Loss | Outliers present |
+| Weighted LS | Heteroscedasticity |
+| GLS | Correlated errors |
 
 ---
 
-## 8. Statistical Properties
+## 4. Derivation and Optimization
 
-### Gauss-Markov Theorem
+### Gradient Derivation
 
-Under assumptions 1-4, OLS estimator is **BLUE**:
-- **B**est
-- **L**inear
-- **U**nbiased
-- **E**stimator
+$$\mathcal{L}(w) = \frac{1}{2n}(y - Xw)^T(y - Xw)$$
 
-### Unbiasedness
+Expanding:
+$$= \frac{1}{2n}(y^Ty - 2y^TXw + w^TX^TXw)$$
 
-$$E[\hat{\boldsymbol{\theta}}] = E[(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}]$$
-$$= (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T E[\mathbf{y}]$$
-$$= (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{X}\boldsymbol{\theta}$$
-$$= \boldsymbol{\theta}$$
+Taking gradient:
+$$\nabla_w \mathcal{L} = \frac{1}{n}(-X^Ty + X^TXw) = \frac{1}{n}X^T(Xw - y)$$
 
-### Variance
+### Hessian (Second Derivative)
 
-$$\text{Var}(\hat{\boldsymbol{\theta}}) = \sigma^2(\mathbf{X}^T\mathbf{X})^{-1}$$
+$$H = \nabla^2_w \mathcal{L} = \frac{1}{n}X^TX$$
 
-### Confidence Intervals
+Since $X^TX$ is positive semi-definite, $\mathcal{L}$ is **convex** → unique global minimum.
 
-For coefficient $\theta_j$:
+### Numerical Stability Concerns
 
-$$\hat{\theta}_j \pm t_{\alpha/2, n-d-1} \cdot \text{SE}(\hat{\theta}_j)$$
+**Problem**: Computing $(X^TX)^{-1}$ directly is numerically unstable.
 
-where $\text{SE}(\hat{\theta}_j) = \hat{\sigma}\sqrt{[(\mathbf{X}^T\mathbf{X})^{-1}]_{jj}}$
+**Solution**: Use QR decomposition or SVD.
 
----
+**QR Approach**:
+$$X = QR \implies w^* = R^{-1}Q^Ty$$
 
-## 9. Evaluation Metrics
+**SVD Approach**:
+$$X = U\Sigma V^T \implies w^* = V\Sigma^{-1}U^Ty$$
 
-### Mean Squared Error (MSE)
-$$\text{MSE} = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2$$
+**Condition Number**: $\kappa(X^TX) = \kappa(X)^2$. If $\kappa > 10^6$, expect numerical issues.
 
-### Root Mean Squared Error (RMSE)
-$$\text{RMSE} = \sqrt{\text{MSE}}$$
+### Gradient Descent Alternative
 
-### Mean Absolute Error (MAE)
-$$\text{MAE} = \frac{1}{n}\sum_{i=1}^{n}|y_i - \hat{y}_i|$$
+When $n$ or $d$ is very large, use iterative methods:
 
-### R² (Coefficient of Determination)
+$$w_{t+1} = w_t - \eta \nabla_w \mathcal{L} = w_t - \frac{\eta}{n}X^T(Xw_t - y)$$
 
-$$R^2 = 1 - \frac{\text{SS}_{\text{res}}}{\text{SS}_{\text{tot}}} = 1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2}$$
-
-**Interpretation:**
-- $R^2 = 1$: Perfect fit
-- $R^2 = 0$: Same as predicting mean
-- $R^2 < 0$: Worse than predicting mean
-
-### Adjusted R²
-
-$$R^2_{\text{adj}} = 1 - \frac{(1-R^2)(n-1)}{n-d-1}$$
-
-Penalizes adding features that don't improve fit.
+**Convergence Rate**: $O(1/t)$ for convex, $O(\exp(-t))$ with strong convexity.
 
 ---
 
-## 10. Computational Complexity
+## 5. Geometric Interpretation
 
-| Method | Time Complexity | Space Complexity |
-|--------|-----------------|------------------|
-| Normal Equation | $O(nd^2 + d^3)$ | $O(d^2)$ |
-| Gradient Descent | $O(ndk)$ | $O(d)$ |
-| SGD | $O(dk)$ per sample | $O(d)$ |
+### The Column Space View
 
-**When to use which:**
-- $d \leq 10,000$: Normal equation
-- $d > 10,000$ or streaming: Gradient descent
+The prediction $\hat{y} = Xw$ is a linear combination of columns of $X$:
+$$\hat{y} = w_1 x_{\cdot 1} + w_2 x_{\cdot 2} + \cdots + w_d x_{\cdot d}$$
+
+**Key Insight**: $\hat{y}$ lives in the column space of $X$, which is a $d$-dimensional subspace of $\mathbb{R}^n$.
+
+### Projection Interpretation
+
+OLS finds the orthogonal projection of $y$ onto $\text{col}(X)$:
+
+$$\hat{y} = X(X^TX)^{-1}X^Ty = Py$$
+
+Where $P = X(X^TX)^{-1}X^T$ is the **projection matrix** (also called "hat matrix").
+
+**Properties of P**:
+- $P^2 = P$ (idempotent)
+- $P^T = P$ (symmetric)
+- $\text{rank}(P) = d$
+- $Py$ is closest point to $y$ in $\text{col}(X)$
+
+### Residual Orthogonality
+
+The residual $\epsilon = y - \hat{y}$ is orthogonal to the column space:
+$$X^T\epsilon = X^T(y - Xw^*) = 0$$
+
+**Geometric Picture**:
+```
+y = target vector in R^n
+↓
+Project onto col(X)
+↓
+ŷ = closest point in subspace
+↓  
+ε = y - ŷ (perpendicular to subspace)
+```
+
+### Overfitting Geometrically
+
+- **Underfitting**: $d$ too small → subspace can't capture $y$
+- **Good fit**: $d$ appropriate → subspace approximates $y$ well
+- **Overfitting**: $d = n$ → perfect fit but no generalization
+
+When $d = n$ and $X$ is invertible:
+$$\hat{y} = X(X^TX)^{-1}X^Ty = XX^{-1}(X^T)^{-1}X^Ty = y$$
+
+Zero training error but terrible on new data!
 
 ---
 
-## 11. Common Issues
+## 6. Probabilistic Interpretation
 
-### Multicollinearity
+### Generative Model
 
-When features are highly correlated, $\mathbf{X}^T\mathbf{X}$ is nearly singular.
+Assume data is generated by:
+$$y = Xw^{true} + \epsilon, \quad \epsilon \sim \mathcal{N}(0, \sigma^2 I)$$
 
-**Detection:**
-- Variance Inflation Factor (VIF)
-- Correlation matrix
+Then:
+$$y | X, w \sim \mathcal{N}(Xw, \sigma^2 I)$$
 
-**Solutions:**
-- Remove correlated features
-- Use Ridge regression
-- PCA for dimensionality reduction
+### Maximum Likelihood Estimation
 
-### Overfitting
+The likelihood:
+$$p(y | X, w, \sigma^2) = \prod_{i=1}^n \mathcal{N}(y_i | w^Tx_i, \sigma^2)$$
 
-When model complexity exceeds data capacity.
+Log-likelihood:
+$$\log p = -\frac{n}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_i(y_i - w^Tx_i)^2$$
 
-**Detection:**
-- Large gap between train/test error
-- Very large coefficients
+Maximizing over $w$ gives:
+$$w_{MLE} = \arg\min_w \|y - Xw\|^2 = (X^TX)^{-1}X^Ty$$
 
-**Solutions:**
-- Regularization (Ridge, Lasso)
-- More training data
-- Feature selection
+**Key Insight**: OLS = MLE under Gaussian noise assumption!
+
+### Bayesian Linear Regression
+
+**Prior**: $w \sim \mathcal{N}(0, \lambda^{-1}I)$
+
+**Posterior**:
+$$p(w | X, y) \propto p(y | X, w) p(w)$$
+$$w | X, y \sim \mathcal{N}(\mu_{post}, \Sigma_{post})$$
+
+Where:
+$$\Sigma_{post} = (\lambda I + \sigma^{-2}X^TX)^{-1}$$
+$$\mu_{post} = \sigma^{-2}\Sigma_{post}X^Ty$$
+
+**Interpretation**:
+- Posterior mean = Ridge regression solution
+- Posterior gives uncertainty estimates on $w$
+- Predictive distribution gives uncertainty on $\hat{y}$
+
+### What Uncertainty Is Ignored in OLS?
+
+1. **Model uncertainty**: Is linear model correct?
+2. **Parameter uncertainty**: How confident are we in $w$?
+3. **Heteroscedasticity**: Does variance change with $x$?
+4. **Epistemic vs aleatoric**: What can be learned vs what is noise?
 
 ---
 
-## Summary
+## 7. Failure Modes and Limitations
 
-| Concept | Key Formula |
-|---------|-------------|
-| Model | $\hat{y} = \mathbf{X}\boldsymbol{\theta}$ |
-| MSE Loss | $\mathcal{L} = \frac{1}{n}\|\mathbf{y} - \mathbf{X}\boldsymbol{\theta}\|_2^2$ |
-| Normal Equation | $\boldsymbol{\theta}^* = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$ |
-| Gradient | $\nabla\mathcal{L} = \frac{2}{n}\mathbf{X}^T(\mathbf{X}\boldsymbol{\theta} - \mathbf{y})$ |
-| Ridge | $\boldsymbol{\theta}^* = (\mathbf{X}^T\mathbf{X} + \lambda\mathbf{I})^{-1}\mathbf{X}^T\mathbf{y}$ |
+### Distribution Shift
+
+**Training**: Learn $w$ from $p_{train}(x, y)$
+**Test**: Apply to $p_{test}(x, y) \neq p_{train}$
+
+If test distribution differs:
+- Covariate shift: $p(x)$ changes
+- Label shift: $p(y)$ changes
+- Concept drift: $p(y|x)$ changes
+
+**OLS has no mechanism to detect or adapt to shift.**
+
+### Data Sparsity
+
+When $n < d$:
+- $X^TX$ is rank-deficient (not invertible)
+- Infinitely many solutions exist
+- Need regularization (Ridge, Lasso)
+
+### Adversarial and Pathological Cases
+
+1. **Outliers**: Single outlier can dramatically shift $w$
+2. **Leverage points**: Outliers in $x$-space have outsized influence
+3. **Perfect multicollinearity**: $X^TX$ singular, no unique solution
+
+**Robustness**: OLS has breakdown point of $1/n$ — one bad point can destroy the fit.
+
+### Nonlinearity
+
+If true relationship is:
+$$y = f(x) + \epsilon, \quad f \text{ nonlinear}$$
+
+Then OLS approximates $f$ with best linear fit, but:
+- Systematic bias in predictions
+- Residuals show patterns (not i.i.d.)
+- Model diagnostics reveal failure
+
+---
+
+## 8. Scaling and Computational Reality
+
+### Time Complexity
+
+| Method | Time | When to Use |
+|--------|------|-------------|
+| Normal equation | $O(nd^2 + d^3)$ | $d$ small |
+| QR decomposition | $O(nd^2)$ | $d$ moderate |
+| Gradient descent | $O(ndt)$ | $d$ or $n$ large |
+| Stochastic GD | $O(dt)$ | $n$ very large |
+
+### Memory Complexity
+
+| Operation | Memory |
+|-----------|--------|
+| Store $X$ | $O(nd)$ |
+| Compute $X^TX$ | $O(d^2)$ |
+| SGD (mini-batch) | $O(bd)$ |
+
+### What Bottlenecks First?
+
+- **Small data** ($n < 10^4$): Computation is instant
+- **Medium data** ($n < 10^6$): Normal equation works
+- **Large data** ($n > 10^6$): Need SGD or online methods
+- **High dimensions** ($d > 10^4$): Regularization essential
+
+### Parallelization
+
+OLS is embarrassingly parallel for:
+- Matrix-vector products ($X^T y$)
+- Mini-batch gradient computation
+
+Distributed algorithms: Hogwild, Parameter Server, AllReduce
+
+---
+
+## 9. Real-World Deployment Considerations
+
+### Latency vs Accuracy Trade-offs
+
+| Scenario | Priority | Approach |
+|----------|----------|----------|
+| Real-time pricing | Latency | Pre-compute, simple features |
+| Scientific analysis | Accuracy | Full model, confidence intervals |
+| Recommendation | Both | Approximate inference |
+
+### Feature Engineering Reality
+
+Real production models often have:
+- Hundreds of raw features
+- Thousands after one-hot encoding
+- Feature interactions, polynomials
+- Missing value handling
+
+**OLS rarely used directly** — but understanding it is foundational.
+
+### Data Quality Issues
+
+1. **Missing values**: Imputation or indicator variables
+2. **Measurement error**: Errors-in-variables models
+3. **Class imbalance**: Weighted regression
+4. **Temporal dependence**: Time series methods
+
+### Interpretability Requirements
+
+Linear regression is often chosen for **interpretability**:
+- Coefficient $w_j$ = effect of feature $j$ on $y$
+- Easy to explain to stakeholders
+- Regulatory requirements (finance, healthcare)
+
+But interpretation requires:
+- Proper scaling of features
+- Understanding of confounding
+- Causal assumptions (often violated)
+
+---
+
+## 10. Comparison With Alternatives
+
+### When Linear Regression Wins
+
+1. **True relationship is linear** (rare but possible)
+2. **Interpretability required** (regulated industries)
+3. **Data is limited** (complex models overfit)
+4. **Baseline needed** (always start with linear)
+5. **Speed matters** (real-time inference)
+
+### When Alternatives Win
+
+| Alternative | When It Wins |
+|-------------|--------------|
+| Ridge/Lasso | High dimensions, multicollinearity |
+| Decision Trees | Nonlinear, discontinuous |
+| Neural Networks | Massive data, complex patterns |
+| Gaussian Processes | Uncertainty quantification needed |
+| XGBoost | Tabular data, competitions |
+
+### Historical Context
+
+- **1805**: Legendre publishes least squares
+- **1809**: Gauss proves optimality properties
+- **1821**: Gauss-Markov theorem
+- **1970s**: Ridge regression (Hoerl & Kennard)
+- **1996**: Lasso (Tibshirani)
+- **2000s**: Elastic net, group lasso
+
+**Why Linear Regression Persists**:
+- Complete theoretical understanding
+- Closed-form solution
+- Foundation for understanding complex methods
+- Surprisingly effective baseline
+
+---
+
+## 11. Mental Model Checkpoint
+
+### Explain Without Equations
+
+Linear regression finds the best straight line (or flat surface in higher dimensions) through your data points. "Best" means the line that minimizes the total squared distance from points to the line. This line then predicts values for new inputs.
+
+**Analogy**: Fitting a ruler through a scatter of dots to predict where future dots might fall.
+
+### Explain Using Only Equations
+
+$$w^* = \arg\min_w \|y - Xw\|_2^2 = (X^TX)^{-1}X^Ty$$
+
+This is the orthogonal projection of $y$ onto $\text{col}(X)$, equivalent to MLE under $y \sim \mathcal{N}(Xw, \sigma^2I)$.
+
+### Predict Behavior Before Running Code
+
+1. **Adding a perfectly correlated feature**: Coefficients become unstable, numerical issues
+2. **Doubling all y values**: Coefficients double
+3. **Adding noise to x**: Coefficients shrink toward zero (attenuation bias)
+4. **Removing outlier**: Large change in coefficients possible
+5. **Increasing n with same d**: Variance of estimates decreases as $O(1/n)$
 
 ---
 
 ## References
 
-1. Bishop, "Pattern Recognition and Machine Learning," Chapter 3
-2. Hastie et al., "The Elements of Statistical Learning," Chapter 3
-3. Stanford CS229 Lecture Notes
+### Foundational
+- Hastie, Tibshirani, Friedman - *The Elements of Statistical Learning* (Ch. 3)
+- Bishop - *Pattern Recognition and Machine Learning* (Ch. 3)
+
+### Historical
+- Legendre (1805) - Original least squares paper
+- Gauss (1809) - *Theoria Motus* - Connection to astronomy
+
+### Advanced
+- Hoerl & Kennard (1970) - Ridge regression
+- Tibshirani (1996) - Lasso
+- Zou & Hastie (2005) - Elastic net
