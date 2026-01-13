@@ -103,20 +103,6 @@ $$\text{Specificity} = \frac{TN}{TN + FP}$$
 
 Plot **True Positive Rate** vs. **False Positive Rate** at various thresholds.
 
-```mermaid
-quadrantChart
-    title ROC Curve Space
-    x-axis Low FPR --> High FPR
-    y-axis Low TPR --> High TPR
-    quadrant-1 Good (High TPR, Low FPR)
-    quadrant-2 Trade-off zone
-    quadrant-3 Poor (Low TPR, High FPR)
-    quadrant-4 Trade-off zone
-    "Perfect": [0.05, 0.95]
-    "Good Model": [0.15, 0.85]
-    "Random": [0.50, 0.50]
-```
-
 **ROC Curve Interpretation:**
 - **X-axis**: False Positive Rate (FPR) from 0 to 1
 - **Y-axis**: True Positive Rate (TPR) from 0 to 1
